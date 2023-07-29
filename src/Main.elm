@@ -169,13 +169,8 @@ update msg model =
                 Err err ->
                     ( { model | responseError = Just err }, Cmd.none )
 
-                Ok json ->
-                    case D.decodeString decodeJsonData (Debug.log "json" json) of
-                        Ok content ->
-                            ( { model | responseSuccess = content }, Cmd.none )
-
-                        Err err ->
-                            ( { model | decodeError = Just (Debug.log "DEBUG" err) }, Cmd.none )
+                Ok content ->
+                    ( { model | responseSuccess = content }, Cmd.none )
 
         NoOp ->
             ( model, Cmd.none )
